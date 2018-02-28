@@ -1,0 +1,16 @@
+{
+  "name": "coconutbutt",
+  "version": "0.1.0",
+  "description": "our coconutbutt extension",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "license": "MPL-2.0",
+  "devDependencies": {
+    "webpack": "^2.3.2"
+  },
+  "dependencies": {
+    "tokenize-text": "^1.1.3"
+  }
+}

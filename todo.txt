@@ -1,0 +1,16 @@
+[X] get harry potter
+[X] process tokens
+[X] word frequency bokeh graph
+[X] bokey graph for appearance of new words
+X plot average distance between occurances of words that show up > 1
+X remove stop words
+X vocabulary growth analysis with words >= 3 times (not stop)
+
+- extend analysis to entire harry potter series
+- browser extension
+    color highlight for relative frequency?
+    click word to get definition, save to local memory for later use,
+save url, context
+    show previous appearances of word clicked on
+- conjugations of verbs count as one word? (stemming)
+
