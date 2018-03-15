@@ -3,6 +3,9 @@
 ## IDEAS
 
 - [X] color common words
+- [ ] Do similar frequency analysis and shading for N-grams (N>1)
+- [ ] extend to Hungarian/English/...
+  - should program target specific languages OR treat all text equally? (i.e. could throw out words not recognized in target language to avoid confusing the analysis)
 - [ ] Shaded color based on word frequency (darker more frequent)
 - [ ] how to find main text on a page not wikipedia (white-list of common main text div/classes, ask user for div/id tag on given page, maybe based on selection,..) 
 - [ ] Part-Of-Tag tag coloring
