@@ -28,6 +28,7 @@ function sendColorWords(payload, sender){
     console.log("tokens_nonums",tokens_nonums);
     var tokens_noproper = removeProperNouns(tokens_nonums);
     console.log("tokens_noproper",tokens_noproper);
+    console.log("fjsakjfhahf",  lang);
     var clean_tokens = filterStopWords(tokens_noproper.map(x => x.toLowerCase()),lang);
 	console.log("clean_tokens",clean_tokens);
 	var counts = createCounts(clean_tokens);
@@ -38,7 +39,7 @@ function sendColorWords(payload, sender){
     console.log("words",words);
 	console.log('sender is ' , sender);
 //	var words = ['Donald', 'figlio'];
-    browser.tabs.sendMessage(sender['tab']['id'], words.slice(0,2));
+    browser.tabs.sendMessage(sender['tab']['id'], words.slice(0,100));
 }
 
 function filterStopWords(words, lang){
@@ -46,10 +47,13 @@ function filterStopWords(words, lang){
     var STOPWORD = {
                             "it": STOPWORDS_IT,
                             "hu": STOPWORDS_HU,
-                            "en": STOPWORDS_AM,
+                            //"en": STOPWORDS_AM,
                     };
     if(lang == ''){ lang = 'it'; }
+    console.log("Language is", lang);
     var language = lang.toLowerCase().slice(0,2);
+    console.log("stopward is", STOPWORD[language]);
+
 	return words.filter(x => !(STOPWORD[language].includes(x)|STOPWORDS_AM.includes(x)|TOP1000IT.includes(x)|x.length < 3));
 }
 
