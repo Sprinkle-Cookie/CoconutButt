@@ -55,8 +55,8 @@ function highlight2(container,what) {
     var content = container.innerHTML,
         newcn = container.innerHTML,
         pattern = new RegExp('^[^<]{3,}|>[^<]{3,}[^<]','g'),
-        replace_regex = new RegExp('(\\b' + what + '\\b)', 'ig'),
-        replaceWith = '<span style="color:red;">$1</span>',
+        replace_regex = new RegExp('(^|[^\\wÀ-ÖØ-öø-ſ])(' + what + ')(?![\\wÀ-ÖØ-öø-ſ])', 'ig'),
+        replaceWith = '$1<span style="color:red;">$2</span>',
         match = pattern.exec(content);
         while(match != null){
             text_block1 = match[0];
