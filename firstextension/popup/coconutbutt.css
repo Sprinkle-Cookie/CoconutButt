@@ -1,0 +1,33 @@
+html, body {
+  width: auto;
+  resize: both;
+  overflow: auto;
+}
+
+.hidden {
+  display: none;
+}
+
+.button {
+  margin: 3% auto;
+  padding: 4px;
+  text-align: center;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+.stats:hover {
+  background-color: #CFF2F2;
+}
+
+.stats {
+  background-color: #E5F2F2;
+}
+
+.analyze {
+  background-color: #FBFBC9;
+}
+
+.analyze:hover {
+  background-color: #EAEA9D;
+}

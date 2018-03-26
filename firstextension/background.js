@@ -8,43 +8,37 @@ var TOP1000_IT = ["non","di","che","è","e","la","il","un","a","per","in","una",
 var TOP1000_HU = ["a","nem","az","hogy","és","egy","van","ez","is","meg","de","csak","mi","én","ha","azt","vagy","itt","igen","volt","ne","el","már","te","kell","még","ki","mit","jó","vagyok","ezt","most","mint","tudom","miért","úgy","akkor","ő","jól","nagyon","lesz","nincs","minden","be","sem","le","olyan","rendben","ott","mert","így","nekem","fel","amit","tudod","volna","majd","maga","hát","köszönöm","hol","valami","lehet","gyerünk","mindig","uram","kis","semmi","hé","oké","talán","ide","neked","aki","ó","neki","gyere","nagy","amikor","vissza","mr","hiszem","valamit","ember","őket","milyen","ma","elég","egész","fog","ilyen","tudja","rá","vagyunk","ami","vannak","igaz","lenne","biztos","tényleg","vele","szóval","két","persze","na","nos","sok","túl","mikor","t","sajnálom","aztán","történt","azért","engem","értem","ahogy","velem","kicsit","valaki","mondta","kérem","se","mondtam","nézd","akarsz","menj","ugye","pedig","szia","mindent","e","voltam","soha","semmit","arra","más","új","szép","akarok","jobb","erre","veled","baj","mindenki","nap","senki","kérlek","legyen","rám","akarom","benne","ezért","akar","ezek","őt","kellett","több","oh","innen","magát","ön","át","emberek","kéne","úr","istenem","várj","minket","rossz","első","oda","láttam","este","téged","egyszer","mondja","miatt","isten","igazán","után","tudok","tessék","mondd","együtt","mintha","hogyan","szerintem","megyek","pár","ja","érted","sosem","apa","tudtam","jön","róla","rajta","másik","figyelj","újra","dolog","elnézést","három","szerint","magad","magam","megy","mind","inkább","jobban","néhány","menjünk","lenni","micsoda","annyira","saját","lett","kellene","alatt","tud","amíg","egyik","teljesen","ebben","holnap","hittem","akartam","gondoltam","vége","anya","ezzel","legjobb","hozzá","egyetlen","tovább","egyedül","hadd","épp","haver","akarod","csinálsz","ők","mire","gyorsan","honnan","voltál","i","akik","mondani","nekünk","hagyd","megint","ahol","nő","idő","azok","látni","lány","szó","voltak","nélkül","egyet","előtt","szeretném","mondom","látom","remélem","mielőtt","ti","kedves","áll","jött","tudsz","leszek","francba","haza","először","rád","kész","igazi","menni","kösz","fogok","ennek","tűnik","add","állj","pontosan","komolyan","nekik","sokat","ben","akarja","később","abba","helló","fogja","szeretnék","pont","tetszik","utolsó","azonnal","beszélni","tehát","hallottam","dr","össze","megvan","ugyan","tudni","nehéz","csinálni","fiam","nagyszerű","ezen","férfi","mégis","remek","pénzt","magának","erről","ennyi","örülök","látod","ok","sincs","többet","azzal","fogsz","hanem","apám","néha","szeretlek","fiú","fogom","reggel","boldog","s","jöjjön","öt","érzem","világ","legalább","bele","fontos","végre","mrs","éve","mennem","tudjuk","hova","meghalt","érdekel","viszlát","szeretem","hová","többé","öreg","halott","es","kurva","éves","összes","ideje","hello","perc","néz","sokkal","mondtad","miről","megyünk","azon","srácok","szabad","fiúk","gondolom","hely","vagytok","tenni","drágám","akit","miss","beszélsz","annak","mindjárt","éppen","mivel","gyönyörű","légy","tedd","ezeket","enyém","kibaszott","tegnap","hülye","maradj","vigyázz","mész","attól","barátom","beszél","nézze","nézz","ment","múlva","hozzám","aha","ban","szükségem","gond","fogd","velünk","óra","valaha","nak","következő","élet","kérek","arról","történik","fél","találkozunk","míg","régi","egyáltalán","lgen","neve","négy","majdnem","között","mennyi","nek","óta","éjjel","napot","pénz","helyzet","gondolsz","the","biztosan","leszel","képes","ellen","dolgot","mondott","john","emlékszel","jelent","érte","jöttem","abban","vedd","uraim","nyugi","ég","menjen","akár","számít","király","jövök","év","jack","gondolod","mond","csinál","valakit","kapitány","folyik","tőle","emlékszem","előbb","természetesen","reggelt","addig","embert","fickó","főnök","tőlem","fognak","segíteni","szépen","new","beszélek","valóban","halló","bár","bocsánat","fenébe","készen","fogunk","ahhoz","anyám","gyerek","sose","otthon","vicces","tiszta","való","jaj","dolgok","elment","hosszú","helyet","hét","munka","mondod","egyszerűen","teljes","pillanat","velük","ilyet","szerinted","bármit","dolgokat","hat","annyi","köszi","fehér","helyes","you","úgyhogy","tudják","amint","amerikai","eddig","nevem","tettem","jössz","utána","jár","csináld","szól","csodálatos","bocs","életben","rohadt","segítség","mást","aggódj","tökéletes","hiszed","belőle","vár","gyerekek","várjon","ajtót","tart","sikerült","mennyire","kettő","fogod","felé","mozgás","mióta","akart","édes","szar","marad","vettem","él","érti","szüksége","egymást","melyik","valójában","fekete","végül","ebből","önnek","hamarosan","ismerem","elő","többi","fiatal","őrült","ezelőtt","láttad","előre","tudta","mondják","bármi","minek","nézel","közel","életem","különben","hívják","segíts","miután","szent","et","adj","igaza","belül","furcsa","ért","magával","hány","alá","rólam","sokáig","jelenti","beteg","alig","tett","maguk","jönni","ötlet","ehhez","hatalmas","maradt","egyszerű","doktor","egyre","látta","rosszul","frank","gondolja","asszonyom","jézusom","legnagyobb","apád","kicsi","voltunk","találtam","békén","szívem","tette","akarnak","gyertek","mellett","második","munkát","lennék","félek","srác","tíz","annyit","érdekes","szívesen","szegény","muszáj","mindegy","nincsenek","azokat","valahol","erős","viszont","valószínűleg","jönnek","bennem","nálam","éjszaka","embereket","élni","fene","tele","számára","mindenkinek","különleges","igazság","kit","percet","úton","dollár","halál","rendőrség","kérdés","igazad","adja","komoly","egészen","múlt","működik","időt","látja","máris","keresztül","mama","tőled","lennie","mondok","könnyű","tiéd","köszönjük","ház","dolgozni","szót","ér","tudunk","jézus","út","lesznek","szörnyű","nagyobb","héten","csináltam","estét","szemét","ülj","leszünk","probléma","kölyök","akinek","hagyja","lányok","például","hangzik","ügy","éjt","kaptam","kint","merre","rögtön","kifelé","dolgozik","hiszi","hisz","tom","and","apja","bent","magukat","körül","tesz","apu","víz","picsába","dehogy","közben","hozzád","utat","jót","anyu","feleségem","charlie","george","sam","szerelem","ennyire","joe","látszik","fáj","onnan","édesem","venni","igazából","amire","ot","szereti","anyád","évvel","ránk","ketten","kicsim","lassan","régen","bébi","tartsd","nyisd","seggfej","veszélyes","tartani","adni","háború","kinek","város","üdv","eltűnt","re","bárki","mondták","kívül","meleg","emberi","fogják","david","felejtsd","jöttél","ölni","michael","mennünk","kemény","mindenkit","kor","beszélj","hölgyem","ezer","aludni","lássuk","fogjuk","szükségünk","drága","as","elnök","esetleg","millió","mai","hölgyeim","föld","szükség","sajnos","siess","ismered","esküszöm","lányt","senkit","fegyvert","mindannyian","része","éreztem","mike","ba","hátra","mondtál","akarta","hihetetlen","vajon","elmegyek","kerül","szart","késő","ismeri","gondol","tudjátok","kislány","mondjuk","lehetne","nektek","gyilkos","messze","végig","vagyis","ettől","kik","segít","látok","ra","kapcsolatban","helyen","lehetséges","nyomás","érzed","kedvesem","korábban","tűz","hagyj","hallgass","hallani","napon","bizony","harry","óh","valahogy","újabb","keres","szeret","igazat","felesége","tábornok","titeket","kérsz","találkoztunk","játszani","hallom","mindketten","hirtelen","to","tegye","itthon","fia","szállj","mögött","lehetett","val","gondolok","adott","napja","beszéltem","hozott","á","távol","végén","egyébként","idióta","paul","maradjon","kutya","vidd","lehetetlen","család","véget","beszélt","hozd","magára","közül","halt","adok","óvatosan","segíthetek","senkinek","bolond","hoztam","ám","városban","rengeteg","rólad","egészet","hadnagy","világon","ugyanaz","ltt","életet","bárcsak","menjetek","okos","hideg","amiért","jövő","szeretne","rég","önt","tudtad","nézzétek","bajod","járt","ezredes","nyugalom","bassza","szereted","gonosz","hoz","miféle","szükséged","papa","tűnt","kapott","szerencsét","került","fasz","szét","nyugodtan","engedd","érzés","annál","baszd","hiszen","nevét","sötét","bob","éjszakát","barátja","hagyjuk","nők","szerelmes","hmm","barátok","éhes","vizet","gratulálok","folyton","legyek","tartok","csinálja","ennél","tudnak","csodás","it","számomra","valakinek","nézzük","játék","csinált","azóta","benned","nőt","csapat","amely","kisasszony","időben","mondanom","azután","értettem","szeretnél","orvos","teszi","dolgom","keresel","egyes","csinálok","házban","bizonyos","világos","mutasd","amiket","james","értelme","sohasem","legyél"]
 
 
-browser.browserAction.onClicked.addListener((tab) => {
-    console.log(tab.url);
-    browser.tabs.query({ currentWindow: true, active: true}).then(sendMessageToTabs).catch(onError);
-});
-
-function sendMessageToTabs(tabsData){
-    browser.tabs.sendMessage(tabsData[0]['id'], {"func": "text"});
-}
 
 browser.runtime.onMessage.addListener(sendColorWords);
 
 function sendColorWords(payload, sender){
-	//console.log('text is ', payload);
-    //var lang = payload['lang'];
-	var text = payload['text'];
-    // language detector
-    var sample = text.slice(0,1000);
-    var lang_det = Franc(sample).slice(0,2);
-    console.log("detected language is ", lang_det);
-	var offset_tokens = tokenize.words()(text);
-	//console.log('tokens are', tokens);
-	var tokens = offset_tokens.map(x => x['value']);
-    var tokens_nonums = tokens.filter(x => (!/[^a-zA-ZÀ-ÿ]/.test(x)));
-    console.log("tokens_nonums",tokens_nonums);
-    var tokens_noproper = removeProperNouns(tokens_nonums);
-    console.log("tokens_noproper",tokens_noproper);
-    var clean_tokens = filterStopWords(tokens_noproper.map(x => x.toLowerCase()),lang_det);
-	console.log("clean_tokens",clean_tokens);
-	var counts = createCounts(clean_tokens);
-    console.log("counds",counts);
-	var sorted_counts = sortedDict(counts);
-    console.log("sorted_counts",sorted_counts);
-	var words = atLeast3Occur(sorted_counts);
-    console.log("words",words);
-	console.log('sender is ' , sender);
-//	var words = ['Donald', 'figlio'];
-    browser.tabs.sendMessage(sender['tab']['id'], words.slice(0,100));
+    if(payload['recipient'] == 'background'){
+        //console.log('text is ', payload);
+        //var lang = payload['lang'];
+        var text = payload['text'];
+        // language detector
+        var sample = text.slice(0,1000);
+        var lang_det = Franc(sample).slice(0,2);
+        console.log("detected language is ", lang_det);
+        var offset_tokens = tokenize.words()(text);
+        console.log('tokens are', offset_tokens);
+        var tokens = offset_tokens.map(x => x['value']);
+        var tokens_nonums = tokens.filter(x => (!/[^a-zA-ZÀ-ÿ]/.test(x)));
+        console.log("tokens_nonums",tokens_nonums);
+        var tokens_noproper = removeProperNouns(tokens_nonums);
+        console.log("tokens_noproper",tokens_noproper);
+        var clean_tokens = filterStopWords(tokens_noproper.map(x => x.toLowerCase()),lang_det);
+        console.log("clean_tokens",clean_tokens);
+        var counts = createCounts(clean_tokens);
+        console.log("counds",counts);
+        var sorted_counts = sortedDict(counts);
+        console.log("sorted_counts",sorted_counts);
+        var words = atLeast3Occur(sorted_counts);
+        console.log("words",words);
+        console.log('sender is ' , sender);
+    //	var words = ['Donald', 'figlio'];
+        browser.tabs.sendMessage(sender['tab']['id'], {"toHighlight": words.slice(0,100),"wordRankDict": counts });
+    }
 }
 
 function filterStopWords(words, lang){

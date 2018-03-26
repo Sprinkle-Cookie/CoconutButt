@@ -1,16 +1,31 @@
 console.log('AHHHHHHH');
 
+var wordRankDict;
 browser.runtime.onMessage.addListener(chooseResponse);
+var alreadyRun = false;
 
 function chooseResponse(response){
 	console.log('response is',response);
-	if(response['func'] == 'text'){
+	if(response['func'] == 'text' && !alreadyRun){
 		getText(response);
 	}
-	else {
-		highlight(response);
+	else if(response['func'] == 'stats') {
+        if(!alreadyRun){return false;}
+        getStats();
+    }
+    else if(!alreadyRun){
+        var toHighlight = response["toHighlight"];
+        wordRankDict = response["wordRankDict"];
+		highlight(toHighlight);
+        alreadyRun = true;
 	}
 }
+
+function getStats(){
+    console.log("sending ", wordRankDict, " to popup");
+    browser.runtime.sendMessage({"recipient":"popup", "wordlist": wordRankDict});
+}
+
 function getTextTag(){
         var tag;
         tag =  document.getElementById('mw-content-text');
@@ -31,7 +46,7 @@ function getText(message){
 
         console.log('text is', text);
         console.log('lang is', document.documentElement.lang);
-        browser.runtime.sendMessage({"lang": document.documentElement.lang, "text": text });
+        browser.runtime.sendMessage({"recipient": "background", "lang": document.documentElement.lang, "text": text });
         console.log("sent text to background") ;
 }
 
@@ -68,3 +83,38 @@ function highlight2(container,what) {
 
     return (container.innerHTML = newcn) !== content;
 }
+
+function getPopupText(selection){
+    console.log("selection is ", selection);
+    var stripped_selection = $.trim(selection);
+    if(wordRankDict[stripped_selection] != null){
+        var popupText = selection + ' occurs ' + wordRankDict[stripped_selection] + ' times';
+        return popupText;
+    }
+    return false;
+}
+
+function getSelected() {
+      if(window.getSelection) { return window.getSelection(); }
+      else if(document.getSelection) { return document.getSelection(); }
+      else {
+              var selection = document.selection && document.selection.createRange();
+              if(selection.text) { return selection.text; }
+              return false;
+            }
+      return false;
+}
+
+$('body').mouseup(function() {
+        var selection = getSelected();
+
+        if (selection) {
+                    var popupText = getPopupText(selection);
+                    console.log(popupText);
+                    if(popupText){
+                        alert(popupText);
+                    }
+                }
+});
+
+undefined
