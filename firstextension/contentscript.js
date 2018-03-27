@@ -20,6 +20,18 @@ function chooseResponse(response){
         alreadyRun = true;
 	}
 }
+function getTextTag(){
+        var tag;
+        tag =  document.getElementById('mw-content-text');
+        if(tag == null){
+            tag = document.getElementsByClassName('entry-content e-content')[0];
+        }
+
+        if(tag == null ){
+                    tag = document.getElementsByTagName("body")[0];
+        }
+        return tag;
+}
 
 function getStats(){
     console.log("sending ", wordRankDict, " to popup");
