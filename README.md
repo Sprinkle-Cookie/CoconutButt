@@ -27,6 +27,7 @@ before reloading in the browser
 - [ ] Ability to change between coloring schemes (freq, POS,)
 - [ ] Bokeh pop-up graphs
 - [ ] double-click on word popup
+    - use Forvo for word pronounciation
     - rank out of all words on page
     - number of occurences
     - shows it's definition in pop-up (dictionary API)
