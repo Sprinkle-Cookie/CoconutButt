@@ -10,7 +10,7 @@
      "content_scripts": [
          {
              "matches" : ["<all_urls>"],
-             "js": ["jquery-3.3.1.min.js", "jquery.mark.min.js", "contentscript.js"]
+             "js": ["jquery-3.3.1.min.js", "jquery.balloon.js", "contentscript.js"]
          }
      ],
      "permissions":[

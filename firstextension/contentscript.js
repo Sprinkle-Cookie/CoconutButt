@@ -18,6 +18,7 @@ function chooseResponse(response){
         wordRankDict = response["wordRankDict"];
 		highlight(toHighlight);
         alreadyRun = true;
+        addPopUps()
 	}
 }
 function getTextTag(){
@@ -62,14 +63,7 @@ function getText(message){
         console.log("sent text to background") ;
 }
 
-//function getText(message){
-	//var text = document.getElementById('mw-content-text').textContent;
-    //browser.runtime.sendMessage({"text": text });
-    //console.log("sent text to background") ;
-//}
-
 function highlight(words){
-	//$('#mw-content-text').mark(words, {'accuracy':'exactly', "diacritics": false});
     var tag = getTextTag();
     for (var i = 0; i < words.length; i++) {
         Array.from(tag.getElementsByTagName('p')).forEach(function(elem) {
@@ -78,12 +72,31 @@ function highlight(words){
     }
 }
 
+function addPopUps(){
+    Array.from($('.redword')).forEach(function(i){
+        console.log("inside redword " + i.textContent);
+        $(i).balloon({
+            contents: getPopupText(i.textContent),
+            tipSize: 24,
+            css: {
+                border: 'solid 4px #5baec0',
+                padding: '10px',
+                fontSize: '150%',
+                fontWeight: 'bold',
+                lineHeight: '3',
+                backgroundColor: '#666',
+                color: '#fff'
+            }
+        });
+    });
+}
+
 function highlight2(container,what) {
     var content = container.innerHTML,
         newcn = container.innerHTML,
         pattern = new RegExp('^[^<]{3,}|>[^<]{3,}[^<]','g'),
         replace_regex = new RegExp('(^|[^\\wÀ-ÖØ-öø-ſ])(' + what + ')(?![\\wÀ-ÖØ-öø-ſ])', 'ig'),
-        replaceWith = '$1<span style="color:red;">$2</span>',
+        replaceWith = '$1<span class="redword" style="color:red;">$2</span>',
         match = pattern.exec(content);
         while(match != null){
             text_block1 = match[0];
@@ -96,9 +109,10 @@ function highlight2(container,what) {
     return (container.innerHTML = newcn) !== content;
 }
 
+
 function getPopupText(selection){
     console.log("selection is ", selection);
-    var stripped_selection = $.trim(selection);
+    var stripped_selection = $.trim(selection.toLowerCase());
     if(wordRankDict[stripped_selection] != null){
         var popupText = selection + ' occurs ' + wordRankDict[stripped_selection] + ' times';
         return popupText;
@@ -116,17 +130,5 @@ function getSelected() {
             }
       return false;
 }
-
-$('body').mouseup(function() {
-        var selection = getSelected();
-
-        if (selection) {
-                    var popupText = getPopupText(selection);
-                    console.log(popupText);
-                    if(popupText){
-                        alert(popupText);
-                    }
-                }
-});
 
 undefined
