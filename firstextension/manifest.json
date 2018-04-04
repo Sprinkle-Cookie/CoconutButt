@@ -14,7 +14,8 @@
          }
      ],
      "permissions":[
-         "activeTab"
+         "activeTab",
+         "storage"
      ],
      "browser_action": {
          "default_icon": {
@@ -27,5 +28,11 @@
      },
      "background":{
          "scripts":["background_scripts/index.js"]
+     },
+     "commands": {
+        "add-selected": {
+            "suggested_key": { "default": "Ctrl+Shift+U" },
+            "description": "send an add-selected event to the extension"
+        }
      }
 }

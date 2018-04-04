@@ -11,36 +11,65 @@ var TOP4555_HU = ["nem","az","hogy","és","egy","van","ez","is","meg","de","csak
 
 
 
-browser.runtime.onMessage.addListener(sendColorWords);
+browser.runtime.onMessage.addListener(function(payload, sender){
+    if(payload['recipient'] == 'background'){
+        console.log('recieved command ', payload);
+        if(payload['func'] == 'sendText'){
+            console.log('send color words');
+            sendColorWords(payload, sender);
+        } else if(payload['func'] == 'storeWord') {
+            console.log('storing off word');
+            storeWord(payload);
+        }
+    }
+});
+
+browser.commands.onCommand.addListener(function(command) {
+    if (command == "add-selected") {
+            browser.tabs.query({ currentWindow: true, active: true}).then(sendAddSelectedToTab).catch(onError);
+            console.log("add-selected word event!");
+          }
+});
+
+function sendAddSelectedToTab(tabsData){
+    browser.tabs.sendMessage(tabsData[0]['id'], {"func": "addWord"});
+}
+
+function onError(fu){
+    console.log(fu);
+}
+
+function storeWord(payload){
+    console.log("payload is ", payload);
+    browser.storage.local.set({ [payload["word"]] : payload['wordData'] });
+}
 
 function sendColorWords(payload, sender){
-    if(payload['recipient'] == 'background'){
-        //console.log('text is ', payload);
-        //var lang = payload['lang'];
-        var text = payload['text'];
-        // language detector
-        var sample = text.slice(0,1000);
-        var lang_det = Franc(sample).slice(0,2);
-        console.log("detected language is ", lang_det);
-        var offset_tokens = tokenize.words()(text);
-        console.log('tokens are', offset_tokens);
-        var tokens = offset_tokens.map(x => x['value']);
-        var tokens_nonums = tokens.filter(x => (!/[^a-zA-ZÀ-ÿ]/.test(x)));
-        console.log("tokens_nonums",tokens_nonums);
-        var tokens_noproper = removeProperNouns(tokens_nonums);
-        console.log("tokens_noproper",tokens_noproper);
-        var clean_tokens = filterStopWords(tokens_noproper.map(x => x.toLowerCase()),lang_det);
-        console.log("clean_tokens",clean_tokens);
-        var counts = createCounts(clean_tokens);
-        console.log("counds",counts);
-        var sorted_counts = sortedDict(counts);
-        console.log("sorted_counts",sorted_counts);
-        var words = atLeast3Occur(sorted_counts);
-        console.log("words",words);
-        console.log('sender is ' , sender);
-    //	var words = ['Donald', 'figlio'];
-        browser.tabs.sendMessage(sender['tab']['id'], {"toHighlight": words.slice(0,100),"wordRankDict": counts });
-    }
+    //console.log('text is ', payload);
+    //var lang = payload['lang'];
+    var text = payload['text'];
+    // language detector
+    var sample = text.slice(0,1000);
+    var lang_det = Franc(sample).slice(0,2);
+    console.log("detected language is ", lang_det);
+    var offset_tokens = tokenize.words()(text);
+    console.log('tokens are', offset_tokens);
+    var tokens = offset_tokens.map(x => x['value']);
+    var tokens_nonums = tokens.filter(x => (!/[^a-zA-ZÀ-ÿ]/.test(x)));
+    console.log("tokens_nonums",tokens_nonums);
+    var tokens_noproper = removeProperNouns(tokens_nonums);
+    console.log("tokens_noproper",tokens_noproper);
+    var clean_tokens = filterStopWords(tokens_noproper.map(x => x.toLowerCase()),lang_det);
+    console.log("clean_tokens",clean_tokens);
+    var counts = createCounts(clean_tokens);
+    console.log("counds",counts);
+    var sorted_counts = sortedDict(counts);
+    console.log("sorted_counts",sorted_counts);
+    var words = atLeast3Occur(sorted_counts);
+    console.log("words",words);
+    console.log('sender is ' , sender);
+//	var words = ['Donald', 'figlio'];
+    browser.tabs.sendMessage(sender['tab']['id'], {"func": "highlight", "toHighlight": words.slice(0,100),"wordRankDict": counts });
 }
 
 function filterStopWords(words, lang){

@@ -4,6 +4,7 @@ var wordRankDict;
 browser.runtime.onMessage.addListener(chooseResponse);
 var alreadyRun = false;
 
+
 function chooseResponse(response){
 	console.log('response is',response);
 	if(response['func'] == 'text' && !alreadyRun){
@@ -13,13 +14,18 @@ function chooseResponse(response){
         if(!alreadyRun){return false;}
         getStats();
     }
-    else if(!alreadyRun){
+    else if(response['func'] == 'highlight' && !alreadyRun){
         var toHighlight = response["toHighlight"];
         wordRankDict = response["wordRankDict"];
 		highlight(toHighlight);
         alreadyRun = true;
         addPopUps()
 	}
+    else if(response['func'] == 'addWord') {
+        console.log('add word! ', response);
+        addWord();
+    }
+
 }
 function getTextTag(){
         var tag;
@@ -59,7 +65,7 @@ function getText(message){
 
         console.log('text is', text);
         console.log('lang is', document.documentElement.lang);
-        browser.runtime.sendMessage({"recipient": "background", "lang": document.documentElement.lang, "text": text });
+        browser.runtime.sendMessage({"recipient": "background", "func": "sendText", "lang": document.documentElement.lang, "text": text });
         console.log("sent text to background") ;
 }
 
@@ -76,19 +82,32 @@ function addPopUps(){
     Array.from($('.redword')).forEach(function(i){
         console.log("inside redword " + i.textContent);
         $(i).balloon({
-            contents: getPopupText(i.textContent),
-            tipSize: 24,
-            css: {
-                border: 'solid 4px #5baec0',
-                padding: '10px',
-                fontSize: '150%',
-                fontWeight: 'bold',
-                lineHeight: '3',
-                backgroundColor: '#666',
-                color: '#fff'
-            }
+                html: true,
+                contents: '<html><p>' + getPopupText(i.textContent) + '</p></html>',
+                tipSize: 24,
+                css: {
+                    border: 'solid 4px #5baec0',
+                    padding: '10px',
+                    fontSize: '150%',
+                    fontWeight: 'bold',
+                    lineHeight: '3',
+                    backgroundColor: '#666',
+                    color: '#fff'
+                }
+            });
         });
-    });
+}
+
+
+function addWord(){
+    /*save word selected in text*/
+    var selected = getSelected();
+    console.log('selected is ', selected);
+    if(selected){
+        url = document.URL;
+        context = 'nothing yet';
+        storeWord(selected, {'url' : url, 'contexts' : [context]});
+    }
 }
 
 function highlight2(container,what) {
@@ -121,14 +140,45 @@ function getPopupText(selection){
 }
 
 function getSelected() {
-      if(window.getSelection) { return window.getSelection(); }
-      else if(document.getSelection) { return document.getSelection(); }
+
+      var func;
+      if(window.getSelection) {
+         selection = window.getSelection();
+         console.log("func output is", selection);
+         if(selection.anchorNode.textContent != selection.focusNode.textContent){
+            /*for text in another span element*/
+            return selection.anchorNode.nextSibling.textContent;
+         }
+         var start = selection.anchorOffset;
+         var end = selection.focusOffset;
+         return selection.anchorNode.textContent.slice(start, end);
+
+      }
+      else if(document.getSelection) {
+         selection = document.getSelection();
+         console.log("func output is", selection);
+         if(selection.anchorNode.textContent != selection.focusNode.textContent){
+            /*for text in another span element*/
+            return selection.anchorNode.nextSibling.textContent;
+         }
+         var start = selection.anchorOffset;
+         var end = selection.focusOffset;
+         return selection.anchorNode.textContent.slice(start, end);
+      }
       else {
               var selection = document.selection && document.selection.createRange();
+              console.log('selection.text is ', selection.text);
               if(selection.text) { return selection.text; }
               return false;
-            }
+        }
       return false;
+}
+
+
+
+function storeWord(word, wordData) {
+        browser.runtime.sendMessage({"recipient": "background", "func": "storeWord", "word": word, "wordData": wordData});
+
 }
 
 undefined
