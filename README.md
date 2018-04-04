@@ -38,4 +38,11 @@ before reloading in the browser
 - [ ] color scheme: N-grams collocations frequency
 - [ ] user interface for change vocabulary or history
 
+# Resources for Development
 
+ - Eloquent Javascript book
+ - [Mozilla Webextension reference](https://developer.mozilla.org/en-US/Add-ons/WebExtensions)
+ - [Chrome extension reference](https://developer.chrome.com/extensions/devguide)
+ - [Awesome-Webextensions repo](https://github.com/bfred-it/Awesome-WebExtensions#libraries-and-frameworks)
+ - [General web extensions tutorial](https://blog.codeship.com/webextensions-101/)
+ - [Javascript and Browser lessons](http://xahlee.info/js/js_dom_live_object.html)
