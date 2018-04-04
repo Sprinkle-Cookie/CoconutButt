@@ -17,7 +17,8 @@ before reloading in the browser
 ## IDEAS
 
 - [X] color common words
-- [ ] save off word option (word, url, context) --> later highlight in green if ever come up again
+- [ ] select + key-combo to save off word in page (word, url, context)
+- [ ] highlight words from history in green
 - [ ] Do similar frequency analysis and shading for N-grams (N>1)
 - [ ] How many words to highlight (not hardcode 100)
 - [X] extend to Hungarian/English/...
@@ -38,4 +39,11 @@ before reloading in the browser
 - [ ] color scheme: N-grams collocations frequency
 - [ ] user interface for change vocabulary or history
 
+# Resources for Development
 
+ - Eloquent Javascript book
+ - [Mozilla Webextension reference](https://developer.mozilla.org/en-US/Add-ons/WebExtensions)
+ - [Chrome extension reference](https://developer.chrome.com/extensions/devguide)
+ - [Awesome-Webextensions repo](https://github.com/bfred-it/Awesome-WebExtensions#libraries-and-frameworks)
+ - [General web extensions tutorial](https://blog.codeship.com/webextensions-101/)
+ - [Javascript and Browser lessons](http://xahlee.info/js/js_dom_live_object.html)
