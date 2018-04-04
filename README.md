@@ -17,7 +17,8 @@ before reloading in the browser
 ## IDEAS
 
 - [X] color common words
-- [ ] save off word option (word, url, context) --> later highlight in green if ever come up again
+- [ ] select + key-combo to save off word in page (word, url, context)
+- [ ] highlight words from history in green
 - [ ] Do similar frequency analysis and shading for N-grams (N>1)
 - [ ] How many words to highlight (not hardcode 100)
 - [X] extend to Hungarian/English/...
