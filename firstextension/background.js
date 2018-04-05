@@ -47,7 +47,9 @@ function storeWord(payload){
 function sendColorWords(payload, sender){
     //console.log('text is ', payload);
     //var lang = payload['lang'];
-    var text = payload['text'];
+     var text = payload['text'];
+   
+
     // language detector
     var sample = text.slice(0,1000);
     var lang_det = Franc(sample).slice(0,2);
@@ -68,8 +70,25 @@ function sendColorWords(payload, sender){
     var words = atLeast3Occur(sorted_counts);
     console.log("words",words);
     console.log('sender is ' , sender);
-//	var words = ['Donald', 'figlio'];
-    browser.tabs.sendMessage(sender['tab']['id'], {"func": "highlight", "toHighlight": words.slice(0,100),"wordRankDict": counts });
+    
+    // history words too
+    var foundHistoryWords = new Object;
+    var loweredText = text.toLowerCase();
+    var storedItemsPromise = browser.storage.local.get(null);
+    storedItemsPromise.then((results) => {
+        var historyWords = Object.keys(results);
+        console.log('searching for history words ', historyWords);
+        for (let historyWord of historyWords) {
+            var wordData = results[historyWord];
+            // only send history words that can be found in text (avoid long computation on client side)
+            if(loweredText.search(historyWord) > -1){
+                foundHistoryWords[historyWord] = results[historyWord];
+            }
+        }
+    }, onError).then( () => {
+        console.log("history words found in text ", Object.keys(foundHistoryWords));
+        browser.tabs.sendMessage(sender['tab']['id'], {"func": "highlight", "toHighlight": words.slice(0,100),"wordRankDict": counts, "foundHistoryWords": foundHistoryWords });
+    }, onError);
 }
 
 function filterStopWords(words, lang){

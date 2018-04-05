@@ -16,10 +16,12 @@ function chooseResponse(response){
     }
     else if(response['func'] == 'highlight' && !alreadyRun){
         var toHighlight = response["toHighlight"];
+        var foundHistoryWords = response["foundHistoryWords"];
         wordRankDict = response["wordRankDict"];
-		highlight(toHighlight);
+		highlight(toHighlight, 'redword', 'red');
+        highlight(Object.keys(foundHistoryWords), 'historyword', 'green');
         alreadyRun = true;
-        addPopUps()
+        addPopUps(foundHistoryWords);
 	}
     else if(response['func'] == 'addWord') {
         console.log('add word! ', response);
@@ -69,53 +71,22 @@ function getText(message){
         console.log("sent text to background") ;
 }
 
-function highlight(words){
+function highlight(words, className, color){
     var tag = getTextTag();
+    var tagArray = Array.from(tag.getElementsByTagName('p'));
     for (var i = 0; i < words.length; i++) {
-        Array.from(tag.getElementsByTagName('p')).forEach(function(elem) {
-			highlight2(elem, words[i]);
+        tagArray.forEach(function(elem) {
+			highlight2(elem, words[i], className, color);
         });
     }
 }
 
-function addPopUps(){
-    Array.from($('.redword')).forEach(function(i){
-        console.log("inside redword " + i.textContent);
-        $(i).balloon({
-                html: true,
-                contents: '<html><p>' + getPopupText(i.textContent) + '</p></html>',
-                tipSize: 24,
-                css: {
-                    border: 'solid 4px #5baec0',
-                    padding: '10px',
-                    fontSize: '150%',
-                    fontWeight: 'bold',
-                    lineHeight: '3',
-                    backgroundColor: '#666',
-                    color: '#fff'
-                }
-            });
-        });
-}
-
-
-function addWord(){
-    /*save word selected in text*/
-    var selected = getSelected();
-    console.log('selected is ', selected);
-    if(selected){
-        url = document.URL;
-        context = 'nothing yet';
-        storeWord(selected, {'url' : url, 'contexts' : [context]});
-    }
-}
-
-function highlight2(container,what) {
+function highlight2(container,what, className, color) {
     var content = container.innerHTML,
         newcn = container.innerHTML,
         pattern = new RegExp('^[^<]{3,}|>[^<]{3,}[^<]','g'),
         replace_regex = new RegExp('(^|[^\\wÀ-ÖØ-öø-ſ])(' + what + ')(?![\\wÀ-ÖØ-öø-ſ])', 'ig'),
-        replaceWith = '$1<span class="redword" style="color:red;">$2</span>',
+        replaceWith = '$1<span class="'+className+'" style="color:'+color+';">$2</span>',
         match = pattern.exec(content);
         while(match != null){
             text_block1 = match[0];
@@ -127,6 +98,54 @@ function highlight2(container,what) {
 
     return (container.innerHTML = newcn) !== content;
 }
+
+function addPopUps(foundHistoryWords){
+    
+    Array.from($('.redword')).forEach(function(i){
+        console.log("inside redword " + i.textContent);
+        var content = '<html><p>' + getPopupText(i.textContent) + '</p></html>';
+        makeBalloon(i, content);
+        });
+
+    Array.from($('.historyword')).forEach(function(i){
+        console.log("inside historyword " + i.textContent);
+        var wordData = foundHistoryWords[i.textContent.toLowerCase()];
+        console.log('matching historydata ', wordData);
+        var content = '<html><p>Seen ' + i.textContent + ' previously in url <a target="_blank" href="' + wordData['url'] + '">' + wordData['title'] +'</a></p></html>'; 
+        makeBalloon(i, content);
+        });
+    
+}
+
+function makeBalloon(elem, htmlContent){
+    $(elem).balloon({
+            html: true,
+            contents: htmlContent,
+            tipSize: 24,
+            css: {
+                border: 'solid 4px #5baec0',
+                padding: '10px',
+                fontSize: '150%',
+                fontWeight: 'bold',
+                lineHeight: '3',
+                backgroundColor: '#666',
+                color: '#fff'
+            }
+        });
+}
+
+function addWord(){
+    /*save word selected in text*/
+    var selected = getSelected().toLowerCase();
+    console.log('selected is ', selected);
+    if(selected){
+        url = document.URL;
+        title = document.title;
+        context = 'nothing yet';
+        storeWord(selected, {'title': title, 'url' : url, 'contexts' : [context]});
+    }
+}
+
 
 
 function getPopupText(selection){
