@@ -100,21 +100,33 @@ function highlight2(container,what, className, color) {
 }
 
 function addPopUps(foundHistoryWords){
-    
+
+    var historyWords = $('.historyword');
+    var histtexts = [];
+    var redAndHistory = [];
+    historyWords.each(function(e){histtexts.push(this.textContent.toLowerCase());});
+
     Array.from($('.redword')).forEach(function(i){
         console.log("inside redword " + i.textContent);
-        var content = '<html><p>' + getPopupText(i.textContent) + '</p></html>';
-        makeBalloon(i, content);
-        });
+        if(!histtexts.includes(i.textContent.toLowerCase())){
+            var content = '<html><p>' + getPopupText(i.textContent) + '</p></html>';
+            makeBalloon(i, content);
+        }else {
+            redAndHistory.push(i.textContent.toLowerCase());
+        }
+    });
 
-    Array.from($('.historyword')).forEach(function(i){
-        console.log("inside historyword " + i.textContent);
+    Array.from(historyWords).forEach(function(i){
+        var content = '<html>'
         var wordData = foundHistoryWords[i.textContent.toLowerCase()];
-        console.log('matching historydata ', wordData);
-        var content = '<html><p>Seen ' + i.textContent + ' previously in url <a target="_blank" href="' + wordData['url'] + '">' + wordData['title'] +'</a></p></html>'; 
+        content += '<p>Seen ' + i.textContent + ' previously in url <a target="_blank" href="' + wordData['url'] + '">' + wordData['title'] +'</a></p>';
+        if (redAndHistory.includes(i.textContent.toLowerCase())){
+            content += '<p> In this document ' + getPopupText(i.textContent) + '</p>';
+        }
+        content += '</html>';
         makeBalloon(i, content);
-        });
-    
+    });
+
 }
 
 function makeBalloon(elem, htmlContent){
