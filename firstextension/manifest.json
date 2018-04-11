@@ -33,6 +33,10 @@
         "add-selected": {
             "suggested_key": { "default": "Ctrl+Shift+U" },
             "description": "send an add-selected event to the extension"
+        },
+        "add-stop": {
+            "suggested_key": { "default": "Ctrl+Shift+B"},
+            "description": "send an add-stop event to the extension"
         }
      }
 }
