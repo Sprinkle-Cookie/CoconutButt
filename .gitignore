@@ -1,1 +1,3 @@
 .*.s[w-z][p-z]
+**/node_modules
+**/background_scripts
