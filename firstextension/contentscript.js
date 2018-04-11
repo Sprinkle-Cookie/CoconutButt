@@ -1,6 +1,8 @@
 console.log('AHHHHHHH');
 
 var wordRankDict;
+var contextDict;
+var pageLang;
 browser.runtime.onMessage.addListener(chooseResponse);
 var alreadyRun = false;
 
@@ -17,7 +19,9 @@ function chooseResponse(response){
     else if(response['func'] == 'highlight' && !alreadyRun){
         var toHighlight = response["toHighlight"];
         var foundHistoryWords = response["foundHistoryWords"];
+        pageLang = response["lang"];
         wordRankDict = response["wordRankDict"];
+        contextDict = response["contextDict"];
 		highlight(toHighlight, 'redword', 'red');
         highlight(Object.keys(foundHistoryWords), 'historyword', 'green');
         alreadyRun = true;
@@ -27,8 +31,12 @@ function chooseResponse(response){
         console.log('add word! ', response);
         addWord();
     }
-
+    else if(response['func'] == 'addStop') {
+        console.log('add stop! ', response);
+        addStop();
+    }
 }
+
 function getTextTag(){
         var tag;
         tag =  document.getElementById('mw-content-text');
@@ -109,7 +117,7 @@ function addPopUps(foundHistoryWords){
     Array.from($('.redword')).forEach(function(i){
         console.log("inside redword " + i.textContent);
         if(!histtexts.includes(i.textContent.toLowerCase())){
-            var content = '<html><p>' + getPopupText(i.textContent) + '</p></html>';
+            var content = '<html>' + getPopupText(i.textContent) + '</html>';
             makeBalloon(i, content);
         }else {
             redAndHistory.push(i.textContent.toLowerCase());
@@ -121,7 +129,7 @@ function addPopUps(foundHistoryWords){
         var wordData = foundHistoryWords[i.textContent.toLowerCase()];
         content += '<p>Seen ' + i.textContent + ' previously in url <a target="_blank" href="' + wordData['url'] + '">' + wordData['title'] +'</a></p>';
         if (redAndHistory.includes(i.textContent.toLowerCase())){
-            content += '<p> In this document ' + getPopupText(i.textContent) + '</p>';
+            content += '<p> In this document </p>' + getPopupText(i.textContent);
         }
         content += '</html>';
         makeBalloon(i, content);
@@ -137,9 +145,9 @@ function makeBalloon(elem, htmlContent){
             css: {
                 border: 'solid 4px #5baec0',
                 padding: '10px',
-                fontSize: '150%',
-                fontWeight: 'bold',
-                lineHeight: '3',
+                fontSize: '100%',
+                fontWeight: 'normal',
+                lineHeight: '2',
                 backgroundColor: '#666',
                 color: '#fff'
             }
@@ -150,24 +158,59 @@ function addWord(){
     /*save word selected in text*/
     var selected = getSelected().toLowerCase();
     console.log('selected is ', selected);
+    
+    if(pageLang == null){
+        console.warn("warning: pageLang has not been set yet (need to run 'analyze' once)");
+    }
+
     if(selected){
         url = document.URL;
         title = document.title;
-        context = 'nothing yet';
-        storeWord(selected, {'title': title, 'url' : url, 'contexts' : [context]});
+        contexts = (selected in contextDict) ? contextDict[selected] : new Array;
+        storeWord(selected, {'title': title, 'url' : url, 'contexts' : contexts, 'lang' : pageLang});
     }
 }
 
-
+function addStop(){
+    /*set word selected in text as stop word*/
+    var selected = getSelected().toLowerCase();
+    console.log('selected is ', selected);
+    if(selected){
+        storeStop(selected);
+    }
+}
 
 function getPopupText(selection){
     console.log("selection is ", selection);
     var stripped_selection = $.trim(selection.toLowerCase());
     if(wordRankDict[stripped_selection] != null){
-        var popupText = selection + ' occurs ' + wordRankDict[stripped_selection] + ' times';
-        return popupText;
+        var popupText = selection + ' occurs ' + wordRankDict[stripped_selection] + ' times.<br>';
+        
+        /*also add some contexts*/
+        var contexts = contextDict[stripped_selection];
+        var shortened_contexts = contexts.slice(0,3).map((sent) => { return shortenCenterText(sent, stripped_selection);});
+        contextText = 'Some examples...<br><ul><li>' + shortened_contexts.join('</li><li>') + '</li></ul>';
+
+        return popupText + contextText;
     }
     return false;
+}
+
+function shortenCenterText(text, token){
+    var buffer = 40;
+    var start = text.toLowerCase().indexOf(token);
+    var end = start + token.length;
+    var pretext = ( buffer > start ) ? '' : '...';
+    var posttext = ( end + buffer > text.length ) ? '' : '...';
+    return pretext + text.slice(max(0,start - buffer), end) + text.slice(end, min(end + buffer, text.length)) + posttext;
+}
+
+function max(a,b){
+    return ( a > b ) ? a : b;
+}
+
+function min(a,b){
+    return ( a < b ) ? a : b;
 }
 
 function getSelected() {
@@ -210,6 +253,13 @@ function getSelected() {
 function storeWord(word, wordData) {
         browser.runtime.sendMessage({"recipient": "background", "func": "storeWord", "word": word, "wordData": wordData});
 
+}
+
+function storeStop(word) {
+    if(pageLang == null){
+        console.warn("warning: pageLang has not been set yet (need to run 'analyze' once)");
+    }
+    browser.runtime.sendMessage({"recipient": "background", "func": "storeStop", "word": word, "lang": pageLang});
 }
 
 undefined
