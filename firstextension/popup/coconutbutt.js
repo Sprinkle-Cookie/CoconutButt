@@ -62,17 +62,23 @@ function displayWord(wordtext, wordDict){
     var word = document.createElement('div');
     var wordDisplay = document.createElement('div');
     var wordH = document.createElement('h2');
-    var wordPara = document.createElement('p');
+    var wordCont = document.createElement('ul');
     var deleteBtn = document.createElement('button');
 
     word.setAttribute('class', 'word');
     wordH.textContent = wordtext;
-    wordPara.textContent = wordDict['contexts'].join(' ... ');
+    var contextList = wordDict['contexts'];
+    for( var i = 0; i < contextList.length; i++){
+        var sent = contextList[i];
+        var item = document.createElement('li'); 
+        item.innerHTML = sent;
+        wordCont.appendChild(item);
+    }
     deleteBtn.setAttribute('class', 'delete');
     deleteBtn.textContent = 'Delete word';
 
     wordDisplay.appendChild(wordH);
-    wordDisplay.appendChild(wordPara);
+    wordDisplay.appendChild(wordCont);
     wordDisplay.appendChild(deleteBtn);
 
     word.appendChild(wordDisplay);
