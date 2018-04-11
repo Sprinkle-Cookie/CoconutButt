@@ -17,8 +17,8 @@ before reloading in the browser
 ## IDEAS
 
 - [X] color common words
-- [ ] select + key-combo to save off word in page (word, url, context)
-- [ ] highlight words from history in green
+- [X] select + key-combo to save off word in page (word, url, context)
+- [X] highlight words from history in green
 - [ ] Do similar frequency analysis and shading for N-grams (N>1)
 - [ ] How many words to highlight (not hardcode 100)
 - [X] extend to Hungarian/English/...
@@ -28,12 +28,10 @@ before reloading in the browser
 - [ ] Part-Of-Tag tag coloring
 - [ ] Ability to change between coloring schemes (freq, POS,)
 - [ ] Bokeh pop-up graphs
-- [ ] double-click on word popup
-    - [X] use Forvo for word pronounciation (ImTranslator ext)
-    - rank out of all words on page
+- [X] hover word popup
+    - [ ] rank out of all words on page
     - [X] number of occurences
-    - [X] shows it's definition in pop-up (dictionary API) (ImTranslator)
-- [ ] add storage to save vocabulary (save word + context, urla of the word)
+- [X] add storage to save vocabulary (save word + context, urla of the word)
 - [X] color scheme: frequency color according to some larger corpus (subtlex-it corpus maybe)
 - [ ] color scheme: frequency color according to saved vocabulary frequency
 - [ ] color scheme: N-grams collocations frequency
