@@ -38,5 +38,10 @@
             "suggested_key": { "default": "Ctrl+Shift+B"},
             "description": "send an add-stop event to the extension"
         }
-     }
+     },
+    "applications":{
+        "gecko":{
+            "id":"{1D488CCA-40A5-11E8-8316-EBD68B3A6C14}"
+        }
+    }
 }
