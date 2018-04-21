@@ -28,12 +28,22 @@ function listenForClicks(){
 
                     }
                     break;
+                 case "Export":
+                    browser.tabs.create({'active':true, 'url':'/export.html'}).then(addHtml);
+                    break;
+
 
         }
     });
 }
 /* display previously-saved stored notes on startup */
 
+function addHtml(tab){
+    console.log("create new tab", tab.id);
+    var statstab = document.getElementById('statsTable');
+    console.log("sending data", statstab.innerHTML);
+    browser.tabs.sendMessage(tab.id, {"func": "export", "statsTableHtml": statstab.innerHTML});
+}
 
 function showHistory() {
       if(!historyShown){
@@ -70,7 +80,7 @@ function displayWord(wordtext, wordDict){
     var contextList = wordDict['contexts'];
     for( var i = 0; i < contextList.length; i++){
         var sent = contextList[i];
-        var item = document.createElement('li'); 
+        var item = document.createElement('li');
         item.innerHTML = sent;
         wordCont.appendChild(item);
     }
