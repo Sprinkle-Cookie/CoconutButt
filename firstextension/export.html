@@ -10,20 +10,10 @@
   <div id="popup-content">
     <div id="statsTable"></div>
   </div>
+<script src="export.js"></script>
 </body>
 
 </html>
 
 
-<script type="text/javascript">
-console.log("This is the export html")
-browser.runtime.onMessage.addListener(createTableFromDict);
-function createTableFromDict(response) {
-    console.log("Response in the export html is", response);
-      if(response['func'] == 'export'){
-          var statstable = document.getElementById("statsTable")
-          statsstable.innerHTML = response['statsTableHtml']
-      }
-}
-</script>
 
