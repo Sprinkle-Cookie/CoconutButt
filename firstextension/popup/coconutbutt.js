@@ -55,8 +55,14 @@ function addHtml(tab){
    fileReader.onload = function(event) {
        console.log(event.target.result);
        browser.runtime.sendMessage({"recipient": "background", "func": "importText", "text": event.target.result});
+       browser.tabs.create({'active':true, 'url':'/importtext.html'}).then(function(tab) {
+            console.log("create new tab", tab.id);
+            console.log("sending data", event.target.result);
+            browser.tabs.sendMessage(tab.id, {"func": "importtext", "importText": event.target.result});
+       });
    };
    fileReader.readAsText(file);
+
  }
 
 function showHistory() {
