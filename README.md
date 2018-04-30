@@ -33,6 +33,7 @@ before reloading in the browser
     - [X] number of occurences
 - [X] add storage to save vocabulary (save word + context, urla of the word)
 - [X] color scheme: frequency color according to some larger corpus (subtlex-it corpus maybe)
+- [X] export stats table in html file
 - [ ] color scheme: frequency color according to saved vocabulary frequency
 - [ ] color scheme: N-grams collocations frequency
 - [ ] user interface for change vocabulary or history
