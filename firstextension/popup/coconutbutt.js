@@ -4,6 +4,9 @@ var alreadyGotStatsTable = false;
 var statsTable = document.getElementById('statsTable');
 var historyContainer = document.querySelector('.history-container');
 var historyShown = false;
+// Listen for a file being selected through the file picker
+const inputElement = document.getElementById("input");
+inputElement.addEventListener("change", handlePicked, false);
 
 function listenForClicks(){
 	document.addEventListener("click", (e) => {
@@ -44,6 +47,17 @@ function addHtml(tab){
     console.log("sending data", statstab.innerHTML);
     browser.tabs.sendMessage(tab.id, {"func": "export", "statsTableHtml": statstab.innerHTML});
 }
+// Get the image file if it was chosen from the pick list
+ function handlePicked() {
+   console.log(this.files);
+   var file = this.files[0];
+   var fileReader = new FileReader();
+   fileReader.onload = function(event) {
+       console.log(event.target.result);
+       browser.runtime.sendMessage({"recipient": "background", "func": "importText", "text": event.target.result});
+   };
+   fileReader.readAsText(file);
+ }
 
 function showHistory() {
       if(!historyShown){

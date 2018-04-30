@@ -31,6 +31,9 @@ browser.runtime.onMessage.addListener(function(payload, sender){
         } else if(payload['func'] == 'storeStop') {
             console.log('storing off stopword');
             storeStop(payload);
+        } else if(payload['func'] == 'importText') {
+            console.log('import text into history');
+            console.log(payload);
         }
     }
 });
@@ -60,7 +63,7 @@ function onError(fu){
 
 function storeStop(payload){
     console.log("payload is ", payload);
-    wordData = new Object; 
+    wordData = new Object;
     wordData['wordType'] = 'stop';
     wordData['lang'] = payload['lang'];
     payload['wordData'] = wordData;
@@ -82,7 +85,7 @@ function getContexts(text, tokens){
       var re = new RegExp('(^|[^\\wÀ-ÖØ-öø-ſ])(' + token + ')(?![\\wÀ-ÖØ-öø-ſ])', 'i');
       var blackSents = sentences.filter( x => re.test(x));
 
-      // now color the words 
+      // now color the words
       replace_regex = new RegExp('(^|[^\\wÀ-ÖØ-öø-ſ])(' + token + ')(?![\\wÀ-ÖØ-öø-ſ])', 'ig'),
       replaceWith = '$1<b>$2</b>';
       var colorSents = blackSents.map(function(sent) {
@@ -121,7 +124,7 @@ function sendColorWords(payload, sender){
         var words = atLeast3Occur(sorted_counts);
         console.log("words",words);
         console.log('sender is ' , sender);
-        
+
         var contextDict = getContexts(text, Object.keys(counts));
 
         // history words too
@@ -151,7 +154,7 @@ function sendColorWords(payload, sender){
 function filterStopWords(words, lang){
     if(lang == ''){ lang = 'hu'; }
     console.log("Language is", lang);
-    
+
     // returns promise so that it can filter by saved STOP words too
     var storedItemsPromise = browser.storage.local.get(null);
     return storedItemsPromise.then((results) => {
