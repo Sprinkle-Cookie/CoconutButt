@@ -34,7 +34,11 @@ browser.runtime.onMessage.addListener(function(payload, sender){
         } else if(payload['func'] == 'importText') {
             console.log('import text into history');
             console.log(payload);
-        }
+        } else if(payload['func'] == 'addWordsPopup'){
+			console.log('adding words from popup');
+			console.log(payload);
+			handleAddWordsPopup(payload);
+		}
     }
 });
 
@@ -61,13 +65,35 @@ function onError(fu){
     console.log(fu);
 }
 
+function handleAddWordsPopup(payload){
+	//first save history words
+	var historyWords = payload["historyWords"];
+	var words = Object.keys(historyWords);
+	words.forEach(function(word){
+		var wordObj = new Object;
+		var wordData = historyWords[word];
+		wordObj["word"] = word;
+		wordObj["wordData"] = wordData;
+		storeWord(wordObj);
+	});
+
+	//second save stop words
+	var stopWords = payload["stopWords"];
+	stopWords.forEach(function(word){
+		var wordObj = new Object;
+		wordObj["word"] = word;
+		wordObj["lang"] = payload["lang"];
+		storeStop(wordObj);
+	});
+}
+
+
 function storeStop(payload){
     console.log("payload is ", payload);
     wordData = new Object;
     wordData['wordType'] = 'stop';
     wordData['lang'] = payload['lang'];
-    payload['wordData'] = wordData;
-    browser.storage.local.set({ [payload["word"]] : payload['wordData'] });
+    browser.storage.local.set({ [payload["word"]] : wordData });
 }
 
 function storeWord(payload){

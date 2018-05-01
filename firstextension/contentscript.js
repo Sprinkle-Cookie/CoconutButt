@@ -35,6 +35,26 @@ function chooseResponse(response){
         console.log('add stop! ', response);
         addStop();
     }
+    else if(response['func'] == 'addWordsPopup') {
+        console.log('add words popup! ', response);
+		// get contexts for history words to add
+        historyWordsData = getWordsContexts(response['historyWords']);
+        browser.runtime.sendMessage({"recipient": "background", "func": "addWordsPopup", "historyWords": historyWordsData , "stopWords": response["stopWords"] , "lang": response["pageLang"]});
+    }
+}
+
+function getWordsContexts(wordArray){
+	var wordDataDict = new Object;
+
+	wordArray.forEach(function(word){
+		var wordData = new Object;
+        wordData["url"] = document.URL;
+        wordData["title"] = document.title;
+        wordData["contexts"] = (word in contextDict) ? contextDict[word] : new Array;
+		wordDataDict[word] = wordData;
+	});
+
+	return wordDataDict;
 }
 
 function getTextTag(){
@@ -52,7 +72,7 @@ function getTextTag(){
 
 function getStats(){
     console.log("sending ", wordRankDict, " to popup");
-    browser.runtime.sendMessage({"recipient":"popup", "wordlist": wordRankDict});
+    browser.runtime.sendMessage({"recipient":"popup", "pageLang": pageLang, "wordlist": wordRankDict});
 }
 
 function getTextTag(){
@@ -158,7 +178,7 @@ function addWord(){
     /*save word selected in text*/
     var selected = getSelected().toLowerCase();
     console.log('selected is ', selected);
-    
+
     if(pageLang == null){
         console.warn("warning: pageLang has not been set yet (need to run 'analyze' once)");
     }
@@ -185,7 +205,7 @@ function getPopupText(selection){
     var stripped_selection = $.trim(selection.toLowerCase());
     if(wordRankDict[stripped_selection] != null){
         var popupText = selection + ' occurs ' + wordRankDict[stripped_selection] + ' times.<br>';
-        
+
         /*also add some contexts*/
         var contexts = contextDict[stripped_selection];
         var shortened_contexts = contexts.slice(0,3).map((sent) => { return shortenCenterText(sent, stripped_selection);});

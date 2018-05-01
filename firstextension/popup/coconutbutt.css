@@ -24,6 +24,17 @@ html, body {
   background-color: #E5F2F2;
 }
 
+.history {
+  background-color: #DDA0DD;
+}
+.exportstats {
+  background-color: #F08080;
+}
+
+.addwords {
+  background-color: #00FA9A;
+}
+
 .analyze {
   background-color: #FBFBC9;
 }

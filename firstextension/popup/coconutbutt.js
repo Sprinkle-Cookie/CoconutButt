@@ -4,6 +4,8 @@ var alreadyGotStatsTable = false;
 var statsTable = document.getElementById('statsTable');
 var historyContainer = document.querySelector('.history-container');
 var historyShown = false;
+var wordRankDict;
+var pageLang;
 // Listen for a file being selected through the file picker
 const inputElement = document.getElementById("input");
 inputElement.addEventListener("change", handlePicked, false);
@@ -34,12 +36,23 @@ function listenForClicks(){
                  case "Export":
                     browser.tabs.create({'active':true, 'url':'/export.html'}).then(addHtml);
                     break;
+                 case "Add Words to History and Stop":
+				 	browser.tabs.query({ currentWindow: true, active: true}).then(addWordsPopup);
+                    break;
 
 
         }
     });
 }
-/* display previously-saved stored notes on startup */
+
+function addWordsPopup(tabqueryresult){
+	currenttab = tabqueryresult[0];
+	console.log('current tab is ', currenttab);
+    browser.tabs.create({'active':true, 'url':'/addwordspopup.html'}).then(function(newtab) {
+		console.log("sending ", wordRankDict, " to tab ", newtab.id);
+		browser.tabs.sendMessage(newtab.id, {"func": "addwordspopup", "currenttabid": currenttab.id, "pageLang": pageLang, "wordRankDict": wordRankDict});
+	});
+}
 
 function addHtml(tab){
     console.log("create new tab", tab.id);
@@ -72,7 +85,9 @@ function showHistory() {
                   var historyKeys = Object.keys(results);
                   for (let historyKey of historyKeys) {
                             var curValue = results[historyKey];
-                            displayWord(historyKey,curValue);
+							if(curValue["wordType"] == 'history'){
+								displayWord(historyKey,curValue);
+							}
                           }
                 }, onError);
           historyShown = true;
@@ -127,6 +142,9 @@ function displayWord(wordtext, wordDict){
 function showStats(payload, sender){
     if(payload['recipient'] == 'popup'){
         wordlist = payload['wordlist'];
+		//save off page lang
+		pageLang = payload['pageLang'];
+        wordRankDict = wordlist;
         console.log('popup received ', wordlist);
         createTableFromDict(wordlist);
     }
